@@ -22,9 +22,10 @@ const __dirname = path.dirname(__filename);
 
 // 🔹 Default Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true // cookie path send করার জন্য
+  origin: ['https://e-com-boni.vercel.app'], 
+  credentials: true
 }));
+
 app.use(express.json({ limit: MAX_JSON_SIZE }));
 app.use(express.urlencoded({ extended: URL_ENCODE }));
 app.use(xss());

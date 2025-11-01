@@ -9,7 +9,7 @@ function getCookie(name) {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5060",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true, // cookie পাঠানোর জন্য
 });
 
