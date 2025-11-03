@@ -26,9 +26,9 @@ const ShopePage = () => {
 
   return (
     <Layoutt>
-               <Categories/>
+               
                <Products/>
-               <Brands/>
+               
     </Layoutt>
   )
 }
