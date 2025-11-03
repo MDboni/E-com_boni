@@ -5,16 +5,14 @@
             "src": "app.js",
             "use": "@vercel/node",
             "config": {
-                "includeFiles": [
-                    "dist/**"
-                ]
+                "includeFiles": ["client/dist/**"]
             }
         }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "app.js"
-        }
-    ]
+  {
+     "src": "/(.*)", 
+     "dest": "app.js" }
+]
+
 }
