@@ -11,18 +11,17 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import router from './routes/api.js';
-import {  MAX_JSON_SIZE, PORT, REQUEST_NUMBER, REQUEST_TIME, URL_ENCODE, WEB_CACHE } from './app/config/config.js';
+import { MAX_JSON_SIZE, REQUEST_NUMBER, REQUEST_TIME, URL_ENCODE, WEB_CACHE } from './app/config/config.js';
 
 dotenv.config();
 const app = express();
 
-// ✅ ES Module এ __dirname fix করতে হবে
+// ✅ ES Module এ __dirname fix
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // 🔹 Default Middleware
 app.use(cors());
-
 app.use(express.json({ limit: MAX_JSON_SIZE }));
 app.use(express.urlencoded({ extended: URL_ENCODE }));
 app.use(xss());
@@ -47,6 +46,11 @@ mongoose.connect(URI)
 // 🔹 Routes (API)
 app.use("/api", router);
 
+// 🔹 Root route (backend live check)
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
+});
+
 // 🔹 Serve Frontend (Vite build folder)
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
 
@@ -55,15 +59,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
 });
 
-app.get("/", (req, res) => {
-  res.send("✅ Backend is running!");
-});
 
-
-// 🔹 Start Server
-app.listen(PORT, () => {
-  console.log(`🚀 Server started on port ${PORT}`);
-});
-
-
+// export default app; করে deploy হবে
 export default app;
