@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5060', // তোমার backend server
+        target: 'https://e-com-boni-27uw.vercel.app/api', 
         changeOrigin: true,
         secure: false,
       },
