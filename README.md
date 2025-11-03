@@ -48,4 +48,5 @@ A modern, serverless E-Commerce platform built for seamless online shopping expe
 ## Installation & Setup (Optional)
 1. Clone the repository:  
 ```bash
-git clone GITHUB_LINK_HERE
+git clone https://github.com/MDboni/E-com_boni
+
