@@ -4,6 +4,7 @@ import Categories from '../components/Product/Categories'
 import Products from '../components/Product/Products'
 import Brands from '../components/Product/Brands'
 import ProductStore from '../Store/ProductStore'
+import { useEffect } from 'react'
 
 const ShopePage = () => {
 
