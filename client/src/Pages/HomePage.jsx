@@ -8,7 +8,6 @@ import Categories from "../components/Product/Categories"
 import Brands from "../components/Product/Brands"
 import Slider from "../components/Product/Slider"
 import Products from "../components/Product/Products"
-import WishStore from "../Store/WishStore"
 
 
 const HomePage = () => {

@@ -18,6 +18,7 @@ import CartPage from './Pages/CartPage'
 import WishPage from './Pages/WishPage'
 import InvoicePage from './Pages/InvoicePage'
 import OrderPage from './Pages/OrderPage'
+import ShopePage from './Pages/ShopePage'
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
          <Route path='/wish' element={<WishPage/>}/>
          <Route path='/invoice' element={<InvoicePage/>}/>
          <Route path='/Order' element={<OrderPage/>}/>
+         <Route path='/shop' element={<ShopePage/>}/>
        </Routes>
     </BrowserRouter>
   )
