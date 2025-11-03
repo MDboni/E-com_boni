@@ -2,6 +2,9 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
+// ✅ Vercel deployed API base URL
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://e-com-boni-27uw.vercel.app/api";
+
 const WishStore = create((set) => ({
   isWishSubmit: false,
   WishListGate: [],
@@ -19,8 +22,8 @@ const WishStore = create((set) => ({
       set({ isWishSubmit: true });
 
       const url = isUpdate
-        ? '/api/UpdateWishListControler'
-        : '/api/createWishListControler';
+        ? `${API_BASE}/UpdateWishListControler`
+        : `${API_BASE}/createWishListControler`;
 
       const tokenHeader = WishStore.getState().getAuthHeader();
       const res = await axios.post(url, { productID }, tokenHeader);
@@ -43,7 +46,7 @@ const WishStore = create((set) => ({
     try {
       console.log("Fetching WishList...");
       const tokenHeader = WishStore.getState().getAuthHeader();
-      const res = await axios.get('/api/WishListControler', tokenHeader);
+      const res = await axios.get(`${API_BASE}/WishListControler`, tokenHeader);
 
       set({
         WishListGate: res.data.data || [],

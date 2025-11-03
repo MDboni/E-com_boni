@@ -1,14 +1,16 @@
 import axios from "axios";
 import { create } from "zustand";
 
-const ZusanStore = create((set) => ({
+// ✅ Vercel deployed API base URL
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://e-com-boni-27uw.vercel.app/api";
 
+const ZusanStore = create((set) => ({
 
   // ===== Brand Store =====
   BrandStore: null,
   BrandListRequest: async () => {
     try {
-      const res = await axios.get("/api/ProductBrandList");
+      const res = await axios.get(`${API_BASE}/ProductBrandList`);
       if (res.data.status === "success") {
         set({ BrandStore: res.data.data });
       }
@@ -22,7 +24,7 @@ const ZusanStore = create((set) => ({
   CategoryStore: null,
   CategoryListRequest: async () => {
     try {
-      const res = await axios.get("/api/ProductCategoryList");
+      const res = await axios.get(`${API_BASE}/ProductCategoryList`);
       if (res.data.status === "success") {
         set({ CategoryStore: res.data.data });
       }
@@ -36,7 +38,7 @@ const ZusanStore = create((set) => ({
   SliderStore: null,
   SliderListRequest: async () => {
     try {
-      const res = await axios.get("/api/ProductSliderList");
+      const res = await axios.get(`${API_BASE}/ProductSliderList`);
       if (res.data.status === "success") {
         set({ SliderStore: res.data.data });
       }
@@ -50,7 +52,7 @@ const ZusanStore = create((set) => ({
   ListByRemarkStore: null,
   ListByRemarkRequest: async (Remark) => {
     try {
-      const res = await axios.get(`/api/ProductListByRemark/${Remark}`);
+      const res = await axios.get(`${API_BASE}/ProductListByRemark/${Remark}`);
       if (res.data.status === "success") {
         set({ ListByRemarkStore: res.data.data });
       }
@@ -59,7 +61,7 @@ const ZusanStore = create((set) => ({
       console.error("ListByRemarkRequest Error:", error.message);
     }
   },
-  
+
 }));
 
 export default ZusanStore;
