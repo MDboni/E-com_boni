@@ -28,11 +28,11 @@ const ContactForm = () => {
     setResponseMsg("");
 
     try {
-      // Backend API call (replace with real API)
+      // Backend API call
       // await axios.post('/api/contact', formData);
 
       setTimeout(() => {
-        setResponseMsg("Thank you! Your message has been sent.");
+        setResponseMsg("✅ Thank you! Your message has been sent.");
         setIsSubmitting(false);
         setFormData({
           name: "",
@@ -48,112 +48,75 @@ const ContactForm = () => {
         });
       }, 1000);
     } catch (error) {
-      setResponseMsg("Something went wrong. Try again!");
+      setResponseMsg("❌ Something went wrong. Try again!");
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-300 to-indigo-400 flex items-center justify-center p-6">
-      <div className="bg-white shadow-2xl rounded-3xl w-full max-w-4xl p-8 animate__animated animate__fadeInUp">
-        <h2 className="text-3xl font-bold text-center mb-6 text-indigo-700 animate__animated animate__fadeInDown">
+    <div className="min-h-screen bg-gradient-to-r from-purple-600 via-pink-500 to-indigo-500 flex items-center justify-center p-6">
+      <div className="bg-gray-100 shadow-2xl rounded-3xl w-full max-w-5xl p-10 animate__animated animate__fadeInUp border-t-8 border-indigo-700">
+        <h2 className="text-4xl font-extrabold text-center mb-8 text-indigo-800 animate__animated animate__fadeInDown">
           Contact Us
         </h2>
 
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Full Name"
-            required
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-400 transition"
-          />
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email Address"
-            required
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 transition"
-          />
-          <input
-            type="text"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-            placeholder="Subject"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-400 transition"
-          />
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="Phone"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-400 transition"
-          />
-          <input
-            type="text"
-            name="company"
-            value={formData.company}
-            onChange={handleChange}
-            placeholder="Company"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-400 transition"
-          />
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            placeholder="City"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-400 transition"
-          />
-          <input
-            type="text"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            placeholder="State"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-300 transition"
-          />
-          <input
-            type="text"
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            placeholder="Country"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-300 transition"
-          />
-          <input
-            type="text"
-            name="zipcode"
-            value={formData.zipcode}
-            onChange={handleChange}
-            placeholder="Zip Code"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-300 transition"
-          />
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Your Message"
-            rows="5"
-            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-400 transition md:col-span-2"
-          ></textarea>
+        <form
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          onSubmit={handleSubmit}
+        >
+          {/* Floating label input fields */}
+          {[
+            { name: "name", placeholder: "Full Name", type: "text" },
+            { name: "email", placeholder: "Email Address", type: "email" },
+            { name: "subject", placeholder: "Subject", type: "text" },
+            { name: "phone", placeholder: "Phone", type: "text" },
+            { name: "company", placeholder: "Company", type: "text" },
+            { name: "city", placeholder: "City", type: "text" },
+            { name: "state", placeholder: "State", type: "text" },
+            { name: "country", placeholder: "Country", type: "text" },
+            { name: "zipcode", placeholder: "Zip Code", type: "text" },
+          ].map((field) => (
+            <div key={field.name} className="relative w-full">
+              <input
+                type={field.type}
+                name={field.name}
+                value={formData[field.name]}
+                onChange={handleChange}
+                placeholder=" "
+                required
+                className="peer w-full p-4 rounded-xl border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 transition bg-white"
+              />
+              <label className="absolute left-4 top-4 text-gray-400 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-indigo-600 peer-focus:text-sm">
+                {field.placeholder}
+              </label>
+            </div>
+          ))}
+
+          <div className="relative md:col-span-2">
+            <textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              placeholder=" "
+              rows="6"
+              required
+              className="peer w-full p-4 rounded-xl border border-gray-300 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 transition bg-white"
+            ></textarea>
+            <label className="absolute left-4 top-4 text-gray-400 text-sm transition-all peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-indigo-600 peer-focus:text-sm">
+              Your Message
+            </label>
+          </div>
 
           <button
             type="submit"
-            className="md:col-span-2 bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-500 transition"
+            className="md:col-span-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl text-lg transition shadow-lg"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Sending..." : "Send Message"}
           </button>
 
           {responseMsg && (
-            <p className="md:col-span-2 text-center text-green-600 font-semibold mt-2">
+            <p className="md:col-span-2 text-center text-green-700 font-semibold mt-4">
               {responseMsg}
             </p>
           )}
