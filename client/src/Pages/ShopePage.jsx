@@ -1,8 +1,6 @@
 import React from 'react'
 import Layoutt from '../components/Layout/Layoutt'
-import Categories from '../components/Product/Categories'
 import Products from '../components/Product/Products'
-import Brands from '../components/Product/Brands'
 import ProductStore from '../Store/ProductStore'
 import { useEffect } from 'react'
 
@@ -14,7 +12,7 @@ const ShopePage = () => {
   useEffect(() => {
     // ✅ IIFE (Immediately Invoked Function)
     (async () => {
-      await FeatureListRequest();
+    
       await BrandListRequest();
       await CategoryListRequest();
       await SliderListRequest();

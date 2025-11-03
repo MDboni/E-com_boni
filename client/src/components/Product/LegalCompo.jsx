@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 
-
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
+    phone: "",
+    company: "",
+    city: "",
+    state: "",
+    country: "",
+    zipcode: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,14 +28,24 @@ const ContactForm = () => {
     setResponseMsg("");
 
     try {
-      // Backend API call
+      // Backend API call (replace with real API)
       // await axios.post('/api/contact', formData);
 
-      // Temporary success simulation
       setTimeout(() => {
         setResponseMsg("Thank you! Your message has been sent.");
         setIsSubmitting(false);
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+          phone: "",
+          company: "",
+          city: "",
+          state: "",
+          country: "",
+          zipcode: "",
+        });
       }, 1000);
     } catch (error) {
       setResponseMsg("Something went wrong. Try again!");
@@ -39,74 +54,111 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="container my-5">
-      <h2 className="text-center mb-4 contact-title animate__animated animate__fadeInDown">
-        Contact Us
-      </h2>
-      <form
-        className="p-4 rounded shadow contact-form animate__animated animate__fadeInUp"
-        onSubmit={handleSubmit}
-      >
-        <div className="mb-3">
-          <label className="form-label">Name</label>
+    <div className="min-h-screen bg-gradient-to-r from-purple-400 via-pink-300 to-indigo-400 flex items-center justify-center p-6">
+      <div className="bg-white shadow-2xl rounded-3xl w-full max-w-4xl p-8 animate__animated animate__fadeInUp">
+        <h2 className="text-3xl font-bold text-center mb-6 text-indigo-700 animate__animated animate__fadeInDown">
+          Contact Us
+        </h2>
+
+        <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
           <input
             type="text"
-            className="form-control input-color1"
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Full Name"
             required
-            placeholder="Your Name"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-400 transition"
           />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Email</label>
           <input
             type="email"
-            className="form-control input-color2"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Email Address"
             required
-            placeholder="Your Email"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-400 transition"
           />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Subject</label>
           <input
             type="text"
-            className="form-control input-color3"
             name="subject"
             value={formData.subject}
             onChange={handleChange}
             placeholder="Subject"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-400 transition"
           />
-        </div>
-
-        <div className="mb-3">
-          <label className="form-label">Message</label>
+          <input
+            type="text"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Phone"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-yellow-400 transition"
+          />
+          <input
+            type="text"
+            name="company"
+            value={formData.company}
+            onChange={handleChange}
+            placeholder="Company"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-red-400 transition"
+          />
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            placeholder="City"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-400 transition"
+          />
+          <input
+            type="text"
+            name="state"
+            value={formData.state}
+            onChange={handleChange}
+            placeholder="State"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-purple-300 transition"
+          />
+          <input
+            type="text"
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            placeholder="Country"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-pink-300 transition"
+          />
+          <input
+            type="text"
+            name="zipcode"
+            value={formData.zipcode}
+            onChange={handleChange}
+            placeholder="Zip Code"
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-green-300 transition"
+          />
           <textarea
-            className="form-control input-color4"
             name="message"
             value={formData.message}
             onChange={handleChange}
+            placeholder="Your Message"
             rows="5"
-            placeholder="Write your message..."
+            className="p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-400 transition md:col-span-2"
           ></textarea>
-        </div>
 
-        <button
-          type="submit"
-          className="btn btn-primary w-100"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Sending..." : "Send Message"}
-        </button>
+          <button
+            type="submit"
+            className="md:col-span-2 bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-500 transition"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Sending..." : "Send Message"}
+          </button>
 
-        {responseMsg && <p className="mt-3 text-center">{responseMsg}</p>}
-      </form>
+          {responseMsg && (
+            <p className="md:col-span-2 text-center text-green-600 font-semibold mt-2">
+              {responseMsg}
+            </p>
+          )}
+        </form>
+      </div>
     </div>
   );
 };
